@@ -50,7 +50,6 @@ usersRouter.post('/', (req, res) => {
     })
 })
 
-
 usersRouter.get('/:id', (req, res) => {
     const foundUser = users.find(user => user.id === Number(req.params.id))
 
@@ -64,6 +63,25 @@ usersRouter.get('/:id', (req, res) => {
 
     res.json({
         user: foundUser
+    })
+})
+
+usersRouter.delete('/:id', (req, res) => {
+    const foundUser = users.find(u => u.id === Number(req.params.id))
+    const index = users.indexOf(foundUser)
+
+    users.splice(index, 1)
+
+    if (!foundUser) {
+        return res.status(404).json({
+            error: `A user with the provided ID does not exist`
+        })
+    }
+
+    res.status(200).json({
+        user: {
+            ...foundUser,
+        }
     })
 })
 
