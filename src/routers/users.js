@@ -85,4 +85,21 @@ usersRouter.delete('/:id', (req, res) => {
     })
 })
 
+usersRouter.put('/:id', (req, res) => {
+    const oldUser = users.find(user => user.id === Number(req.params.id))
+    const index = users.indexOf(oldUser)
+    console.log(oldUser)
+
+    users.splice(index, 1, {...req.body, id: oldUser.id})
+
+    const updatedUser = users.find(user => user.id === Number(req.params.id))
+    
+    console.log(updatedUser)
+    res.status(200).json({
+        user: {
+            ...updatedUser,
+        }
+    })
+})
+
 module.exports = usersRouter

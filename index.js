@@ -14,10 +14,12 @@ app.use(morgan("dev"));
 // REQUIRE ROUTERS
 
 const usersRouter = require("./src/routers/users");
+const filmRouter = require("./src/routers/films")
 
 // ADD ROUTERS TO APP
 
 app.use("/users", usersRouter)
+app.use("/films", filmRouter)
 
 
 /* START SERVER */
